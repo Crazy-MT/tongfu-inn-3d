@@ -1,0 +1,5 @@
+{
+  "framework": null,
+  "buildCommand": "mkdir -p public/blender && cp '同福客栈.html' public/index.html && cp '同福客栈·Blender离线漫游.html' public/blender/index.html",
+  "outputDirectory": "public"
+}
