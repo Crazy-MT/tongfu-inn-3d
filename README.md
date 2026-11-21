@@ -1,6 +1,8 @@
 # 同福客栈 ·《武林外传》3D 漫游
 
-**在线漫游**　[进入同福客栈 · Three.js 轻量版](https://tongfu-inn-3d.vercel.app/)　｜　[进入同福客栈 · Blender 版](https://tongfu-inn-3d.vercel.app/blender/)
+**Vercel 在线漫游**　[进入同福客栈 · Three.js 轻量版](https://tongfu-inn-3d.vercel.app/)　｜　[进入同福客栈 · Blender 版](https://tongfu-inn-3d.vercel.app/blender/)
+
+**GitHub Pages 备用入口**　[进入同福客栈 · Three.js 轻量版](https://crazy-mt.github.io/tongfu-inn-3d/)　｜　[进入同福客栈 · Blender 版](https://crazy-mt.github.io/tongfu-inn-3d/blender/)
 
 从七侠镇的街上跨进客栈，门槛后还要下两级石阶，才到大家吃饭的那张长桌。你可以走过去看看秀才的算盘，顺木楼梯去佟湘玉的房间，或穿过蓝布帘，到后院找大嘴。
 
