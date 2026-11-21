@@ -16,10 +16,10 @@ jobs:
       - uses: actions/checkout@v4
       - name: Publish both walks and verify live files
         env:
-          TOKEN: ${{ secrets.MODELSCOPE_API_TOKEN }}
+          TOKEN: ${{ secrets.GITHUB }}
         run: |
           set -euo pipefail
-          : "${TOKEN:?Configure MODELSCOPE_API_TOKEN in repository secrets}"
+          : "${TOKEN:?Configure GITHUB (ModelScope token) in repository secrets}"
           studio=AImtmtmt/tongfu-inn-3d
           git lfs install
           GIT_LFS_SKIP_SMUDGE=1 git clone --depth=1 --branch master "https://www.modelscope.cn/studios/$studio.git" "$RUNNER_TEMP/studio"
