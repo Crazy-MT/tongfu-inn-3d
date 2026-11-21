@@ -1,5 +1,7 @@
 # 同福客栈 ·《武林外传》3D 漫游
 
+**魔搭国内漫游**　[进入同福客栈 · Three.js 轻量版](https://aimtmtmt-tongfu-inn-3d.ms.show/index.html)　｜　[进入同福客栈 · Blender 版](https://aimtmtmt-tongfu-inn-3d.ms.show/blender.html)
+
 **Vercel 在线漫游**　[进入同福客栈 · Three.js 轻量版](https://tongfu-inn-3d.vercel.app/)　｜　[进入同福客栈 · Blender 版](https://tongfu-inn-3d.vercel.app/blender/)
 
 **GitHub Pages 备用入口**　[进入同福客栈 · Three.js 轻量版](https://crazy-mt.github.io/tongfu-inn-3d/)　｜　[进入同福客栈 · Blender 版](https://crazy-mt.github.io/tongfu-inn-3d/blender/)

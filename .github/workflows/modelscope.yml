@@ -1,0 +1,50 @@
+name: Deploy to ModelScope
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: modelscope-production
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish both walks and verify live files
+        env:
+          TOKEN: ${{ secrets.MODELSCOPE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          : "${TOKEN:?Configure MODELSCOPE_API_TOKEN in repository secrets}"
+          studio=AImtmtmt/tongfu-inn-3d
+          git lfs install
+          GIT_LFS_SKIP_SMUDGE=1 git clone --depth=1 --branch master "https://www.modelscope.cn/studios/$studio.git" "$RUNNER_TEMP/studio"
+          cp 同福客栈.html "$RUNNER_TEMP/studio/index.html"
+          cp 同福客栈·Blender离线漫游.html "$RUNNER_TEMP/studio/blender.html"
+          cd "$RUNNER_TEMP/studio"
+          git add index.html blender.html
+          if ! git diff --cached --quiet; then
+            git -c user.name=github-actions -c user.email=github-actions@users.noreply.github.com commit -m "Publish GitHub main $GITHUB_SHA"
+            cat > "$RUNNER_TEMP/ms-askpass" <<'ASKPASS'
+          #!/bin/sh
+          case "$1" in
+            *Username*) echo oauth2 ;;
+            *Password*) printf '%s\n' "$TOKEN" ;;
+          esac
+          ASKPASS
+            chmod 700 "$RUNNER_TEMP/ms-askpass"
+            GIT_ASKPASS="$RUNNER_TEMP/ms-askpass" GIT_TERMINAL_PROMPT=0 git push origin HEAD:master
+          fi
+          curl --fail --silent --show-error -X POST -H "Authorization: Bearer $TOKEN" "https://www.modelscope.cn/openapi/v1/studios/$studio/deploy" > "$RUNNER_TEMP/ms-result"
+          jq -e '(.success != false and .Success != false) and ((.Code // .code // 200) | tostring | IN("200","0","Success","success"))' "$RUNNER_TEMP/ms-result" >/dev/null
+          for file in index.html blender.html; do
+            for attempt in {1..45}; do
+              if curl -fsSL --max-time 60 "https://aimtmtmt-tongfu-inn-3d.ms.show/$file?rev=$GITHUB_SHA" -o "$RUNNER_TEMP/live" && cmp -s "$file" "$RUNNER_TEMP/live"; then break; fi
+              sleep 10
+            done
+            cmp "$file" "$RUNNER_TEMP/live"
+          done
