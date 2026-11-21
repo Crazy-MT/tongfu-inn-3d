@@ -7,7 +7,7 @@ permissions:
   contents: read
 concurrency:
   group: modelscope-production
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -43,7 +43,7 @@ jobs:
           jq -e '(.success != false and .Success != false) and ((.Code // .code // 200) | tostring | IN("200","0","Success","success"))' "$RUNNER_TEMP/ms-result" >/dev/null
           for file in index.html blender.html; do
             for attempt in {1..45}; do
-              if curl -fsSL --max-time 60 "https://aimtmtmt-tongfu-inn-3d.ms.show/$file?rev=$GITHUB_SHA" -o "$RUNNER_TEMP/live" && cmp -s "$file" "$RUNNER_TEMP/live"; then break; fi
+              if curl -fsSL --connect-timeout 15 --max-time 300 "https://aimtmtmt-tongfu-inn-3d.ms.show/$file?rev=$GITHUB_SHA" -o "$RUNNER_TEMP/live" && cmp -s "$file" "$RUNNER_TEMP/live"; then break; fi
               sleep 10
             done
             cmp "$file" "$RUNNER_TEMP/live"
