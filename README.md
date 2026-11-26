@@ -78,4 +78,6 @@
 
 抒情版的钢琴选段来自公开曲集收录的《茉莉花变奏曲》。[曲集第 7 轨](https://www.bilibili.com/video/BV1gfnfecEJe/?p=7)
 
+后院井边的洗衣用具参考第 7 集小郭洗衣的画面，磨台旁的木架和晾晒的玉米参考第 19、41 集。卧房的朝向沿用本项目的布局，院内距离按漫游尺度估算。[后院剧照与分集出处](https://github.com/Heart06/tongfu-inn/blob/4de43d98fd6938ce3df707b204daa4e7b2e53301/dist/data/courtyard-memories.json)
+
 两个 HTML 均内嵌 Three.js r160。[Three.js 许可证](./THREE-LICENSE.txt) · [部分材质来源：Poly Haven](https://polyhaven.com/textures)
